@@ -35,8 +35,6 @@ object frmDBexplorer: TfrmDBexplorer
         Alignment = taCenter
         Width = 640
       end>
-    ExplicitTop = 422
-    ExplicitWidth = 624
   end
   object ComboBox1: TComboBox
     Left = 16
@@ -48,6 +46,7 @@ object frmDBexplorer: TfrmDBexplorer
     OnChange = ComboBox1Change
     Items.Strings = (
       'Microsoft Access (*.mdb)'
-      'Firebird (*.fdb)')
+      'Firebird (*.fdb)'
+      'Microsoft SQL Server')
   end
 end

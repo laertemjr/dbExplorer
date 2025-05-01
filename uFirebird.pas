@@ -56,6 +56,8 @@ procedure TfrmFirebird.FormActivate(Sender: TObject);
 begin
    StatusBar1.Panels[0].Text := sVerInfo;
    OpenDialog1.Filter := 'Firebird database (*.fdb)|*.fdb';
+   Edit2.Text := '3050';
+   Button1.SetFocus;
 end;
 
 procedure TfrmFirebird.Button1Click(Sender: TObject);

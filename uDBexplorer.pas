@@ -27,7 +27,7 @@ var
 implementation
 
 uses
-   uAccess, uFirebird;
+   uAccess, uFirebird, uSQLServer;
 
 {$R *.dfm}
 
@@ -51,6 +51,11 @@ begin
       1: // Firebird (*.fdb)
       begin
          frmFirebird.ShowModal;
+      end;
+
+      2: // MS-SQL Server (*.mdf)
+      begin
+         frmSQLServer.ShowModal;
       end;
 
    end;
