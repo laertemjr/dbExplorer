@@ -10,7 +10,7 @@ uses
   FireDAC.Phys, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
   FireDAC.Phys.MSAccDef, FireDAC.Phys.ODBCBase, FireDAC.Phys.MSAcc,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
-  FireDAC.Comp.DataSet, Vcl.Grids, Vcl.DBGrids;
+  FireDAC.Comp.DataSet, Vcl.Grids, Vcl.DBGrids, Data.Win.ADODB;
 
 type
   TfrmAccess = class(TForm)
@@ -19,13 +19,13 @@ type
     OpenDialog1: TOpenDialog;
     Edit1: TEdit;
     Label1: TLabel;
-    FDConnection1: TFDConnection;
-    FDPhysMSAccessDriverLink1: TFDPhysMSAccessDriverLink;
     ComboBox1: TComboBox;
     Label2: TLabel;
     FDTable1: TFDTable;
     DataSource1: TDataSource;
     DBGrid1: TDBGrid;
+    FDConnection1: TFDConnection;
+    FDPhysMSAccessDriverLink1: TFDPhysMSAccessDriverLink;
     procedure FormActivate(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
@@ -51,7 +51,7 @@ uses
 procedure TfrmAccess.FormActivate(Sender: TObject);
 begin
    StatusBar1.Panels[0].Text := sVerInfo;
-   OpenDialog1.Filter := 'Microsoft Access database (*.mdb)|*.mdb';
+   OpenDialog1.Filter := 'Microsoft Access database|*.mdb;*.accdb';
 end;
 
 procedure TfrmAccess.Button1Click(Sender: TObject);

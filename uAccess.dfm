@@ -94,21 +94,22 @@ object frmAccess: TfrmAccess
     Left = 560
     Top = 16
   end
-  object FDConnection1: TFDConnection
-    Left = 464
-    Top = 16
-  end
-  object FDPhysMSAccessDriverLink1: TFDPhysMSAccessDriverLink
-    Left = 328
-    Top = 16
-  end
   object FDTable1: TFDTable
     Connection = FDConnection1
     Left = 560
     Top = 96
   end
   object DataSource1: TDataSource
+    DataSet = FDTable1
     Left = 464
     Top = 96
+  end
+  object FDConnection1: TFDConnection
+    Left = 464
+    Top = 16
+  end
+  object FDPhysMSAccessDriverLink1: TFDPhysMSAccessDriverLink
+    Left = 320
+    Top = 8
   end
 end

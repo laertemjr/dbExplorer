@@ -43,17 +43,17 @@ procedure TfrmDBexplorer.ComboBox1Change(Sender: TObject);
 begin
    case ComboBox1.ItemIndex of
 
-      0: // Microsoft Access (*.mdb)
-      begin
-         frmAccess.ShowModal;
-      end;
-
-      1: // Firebird (*.fdb)
+      0: // Firebird
       begin
          frmFirebird.ShowModal;
       end;
 
-      2: // MS-SQL Server (*.mdf)
+      1: // MS-Access
+      begin
+         frmAccess.ShowModal;
+      end;
+
+      2: // MS-SQL Server
       begin
          frmSQLServer.ShowModal;
       end;
