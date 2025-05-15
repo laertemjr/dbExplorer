@@ -13,6 +13,10 @@ Explorador de Bancos de Dados | *Database Explorer*
 * *Database support: Firebird, Microsoft Access, Microsoft SQL Server, and MySQL Server.*
 
 
+### ℹ️ Informações / *Informations*
+* Para acessar o MySQL Server, crie uma Fonte de Dados de Sistema ODBC 32 bits no Windows, usando o driver MySQL ODBC 8.0 ANSI Driver.
+* *To access MySQL Server, create a 32-bit ODBC System Data Source on Windows using the MySQL ODBC 8.0 ANSI Driver.*
+
 ### 🛠️ Construído com / *Built with*
 * [![Delphi](https://img.shields.io/badge/-Delphi-E62431?logo=delphi&logoColor=white&style=plastic)](https://www.embarcadero.com/products/delphi) 12.1 Athens
 
