@@ -9,8 +9,8 @@ Explorador de Bancos de Dados | *Database Explorer*
 
 
 ### 👉 Características / *Features*
-* Suporta os bancos de dados: Firebird, Microsoft Access e Microsoft SQL Server
-* *Database support: Firebird, Microsoft Access, and Microsoft SQL Server*
+* Suporta os bancos de dados: Firebird, Microsoft Access, Microsoft SQL Server, e MySQL Server.
+* *Database support: Firebird, Microsoft Access, Microsoft SQL Server, and MySQL Server.*
 
 
 ### 🛠️ Construído com / *Built with*
