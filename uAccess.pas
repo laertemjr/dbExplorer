@@ -5,12 +5,16 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls,
-  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf,
-  FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async,
-  FireDAC.Phys, FireDAC.VCLUI.Wait, Data.DB, FireDAC.Comp.Client,
-  FireDAC.Phys.MSAccDef, FireDAC.Phys.ODBCBase, FireDAC.Phys.MSAcc,
-  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
-  FireDAC.Comp.DataSet, Vcl.Grids, Vcl.DBGrids, Data.Win.ADODB;
+  FireDAC.Stan.Intf,
+
+  FireDAC.Phys, Data.DB, FireDAC.Comp.Client,
+  FireDAC.Phys.ODBCBase, FireDAC.Phys.MSAcc,
+
+  FireDAC.Comp.DataSet, Vcl.Grids, Vcl.DBGrids, Data.Win.ADODB,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.VCLUI.Wait,
+  FireDAC.Phys.MSAccDef;
 
 type
   TfrmAccess = class(TForm)
@@ -62,11 +66,14 @@ begin
       Edit1.Text := OpenDialog1.FileName;
       connectParams;
       try
+         Screen.Cursor := crSQLWait;
          FDConnection1.Connected := True;
+         Screen.Cursor := crDefault;
          ShowMessage('Database is connected.');
          FDConnection1.GetTableNames('', '', '', ComboBox1.Items);
       except
          ShowMessage('Could not connect to database.');
+         Screen.Cursor := crDefault;
          clean;
       end;
    end

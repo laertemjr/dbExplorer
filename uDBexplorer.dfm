@@ -47,6 +47,7 @@ object frmDBexplorer: TfrmDBexplorer
     Items.Strings = (
       'Firebird'
       'Microsoft Access'
-      'Microsoft SQL Server')
+      'Microsoft SQL Server'
+      'MySQL Server')
   end
 end

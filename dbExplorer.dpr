@@ -5,7 +5,9 @@ uses
   uDBexplorer in 'uDBexplorer.pas' {frmDBexplorer},
   uAccess in 'uAccess.pas' {frmAccess},
   uFirebird in 'uFirebird.pas' {frmFirebird},
-  uSQLServer in 'uSQLServer.pas' {frmSQLServer};
+  uMySQL in 'uMySQL.pas' {frmMySQL},
+  uGlobal in 'uGlobal.pas',
+  uMSSQL in 'uMSSQL.pas' {frmMSSQL};
 
 {$R *.res}
 
@@ -16,6 +18,7 @@ begin
   Application.CreateForm(TfrmDBexplorer, frmDBexplorer);
   Application.CreateForm(TfrmAccess, frmAccess);
   Application.CreateForm(TfrmFirebird, frmFirebird);
-  Application.CreateForm(TfrmSQLServer, frmSQLServer);
+  Application.CreateForm(TfrmMySQL, frmMySQL);
+  Application.CreateForm(TfrmMSSQL, frmMSSQL);
   Application.Run;
 end.

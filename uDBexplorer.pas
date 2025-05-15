@@ -27,7 +27,7 @@ var
 implementation
 
 uses
-   uAccess, uFirebird, uSQLServer;
+   uAccess, uFirebird, uMSSQL, uMySQL;
 
 {$R *.dfm}
 
@@ -55,7 +55,12 @@ begin
 
       2: // MS-SQL Server
       begin
-         frmSQLServer.ShowModal;
+         frmMSSQL.ShowModal;
+      end;
+
+      3: // MySQL Server
+      begin
+         frmMySQL.ShowModal;
       end;
 
    end;
