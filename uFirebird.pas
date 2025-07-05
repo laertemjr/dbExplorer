@@ -19,9 +19,9 @@ uses
 type
   TfrmFirebird = class(TForm)
     StatusBar1: TStatusBar;
-    Button1: TButton;
+    btnPathDB: TButton;
     OpenDialog1: TOpenDialog;
-    Edit1: TEdit;
+    edtPathDB: TEdit;
     Label1: TLabel;
     FDConnection1: TFDConnection;
     ComboBox1: TComboBox;
@@ -31,12 +31,17 @@ type
     DBGrid1: TDBGrid;
     FDPhysFBDriverLink1: TFDPhysFBDriverLink;
     Label3: TLabel;
-    Edit2: TEdit;
+    edtPort: TEdit;
+    edtPathLib: TEdit;
+    btnPathLib: TButton;
+    btnConnect: TButton;
+    Label4: TLabel;
     procedure FormActivate(Sender: TObject);
-    procedure Button1Click(Sender: TObject);
+    procedure btnPathDBClick(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure Edit2Change(Sender: TObject);
+    procedure btnConnectClick(Sender: TObject);
+    procedure btnPathLibClick(Sender: TObject);
   private
     { Private declarations }
     procedure connectParams();
@@ -58,32 +63,8 @@ uses
 procedure TfrmFirebird.FormActivate(Sender: TObject);
 begin
    StatusBar1.Panels[0].Text := sVerInfo;
-   OpenDialog1.Filter := 'Firebird database (*.fdb)|*.fdb';
-   Edit2.Text := '3050';
-   Button1.SetFocus;
-end;
-
-procedure TfrmFirebird.Button1Click(Sender: TObject);
-begin
-   OpenDialog1.FileName := EmptyStr;
-   if OpenDialog1.Execute then
-   begin
-      Edit1.Text := OpenDialog1.FileName;
-      connectParams;
-      try
-         Screen.Cursor := crSQLWait;
-         FDConnection1.Connected := True;
-         Screen.Cursor := crDefault;
-         ShowMessage('Database is connected.');
-         FDConnection1.GetTableNames('', '', '', ComboBox1.Items);
-      except
-         ShowMessage('Could not connect to database.');
-         Screen.Cursor := crDefault;
-         clean;
-      end;
-   end
-   else
-      clean;
+   edtPort.Text := '3050';
+   btnPathDB.SetFocus;
 end;
 
 procedure TfrmFirebird.ComboBox1Change(Sender: TObject);
@@ -100,31 +81,64 @@ begin
    FDConnection1.Params.Clear;
    FDConnection1.DriverName := 'FB';
    FDConnection1.LoginPrompt := False;
-   FDConnection1.Params.Add('Database=' + OpenDialog1.FileName);
+   FDConnection1.Params.Add('Database=' + edtPathDB.Text);
    FDConnection1.Params.Add('User_Name=SYSDBA');
    FDConnection1.Params.Add('Password=masterkey');
    FDConnection1.Params.Add('Protocol=TCPIP');
-   //FDConnection1.Params.Add('Server=127.0.0.1');
-   FDConnection1.Params.Add('Port=' + Edit2.Text);
+   FDConnection1.Params.Add('Server=127.0.0.1');
+   FDConnection1.Params.Add('Port=' + edtPort.Text);
    //FDConnection1.Params.Add('CharacterSet=WIN1252');
    //FDConnection1.Params.Add('SQLDialect=3');
 end;
 
-procedure TfrmFirebird.Edit2Change(Sender: TObject);
+procedure TfrmFirebird.btnPathDBClick(Sender: TObject);
 begin
-   if Edit2.Text <> EmptyStr then
-      Button1.Enabled := True
+   OpenDialog1.FileName := EmptyStr;
+   OpenDialog1.Filter := 'Firebird database (*.fdb)|*.fdb';
+   if OpenDialog1.Execute then
+      edtPathDB.Text := OpenDialog1.FileName
    else
-      Button1.Enabled := False;
+      edtPathDB.Clear;
+end;
+
+procedure TfrmFirebird.btnPathLibClick(Sender: TObject);
+begin
+   OpenDialog1.FileName := EmptyStr;
+   OpenDialog1.Filter := 'Firebird database library (*.dll)|*.dll';
+   if OpenDialog1.Execute then
+   begin
+      FDPhysFBDriverLink1.VendorLib := OpenDialog1.FileName;
+      edtPathLib.Text := OpenDialog1.FileName;
+   end
+   else
+   begin
+      FDPhysFBDriverLink1.VendorLib := EmptyStr;
+      edtPathLib.Clear;
+   end;
+end;
+
+procedure TfrmFirebird.btnConnectClick(Sender: TObject);
+begin
+   FDConnection1.Connected := False;
+   connectParams;
+   try
+      Screen.Cursor := crSQLWait;
+      FDConnection1.Connected := True;
+      Screen.Cursor := crDefault;
+      ShowMessage('Database is connected.');
+      FDConnection1.GetTableNames('', '', '', ComboBox1.Items);
+   except
+      ShowMessage('Could not connect to database.');
+      Screen.Cursor := crDefault;
+   end;
 end;
 
 procedure TfrmFirebird.clean;
 begin
-   Edit1.Clear;
-   Edit2.Clear;
+   edtPathDB.Clear;
+   edtPathLib.Clear;
    ComboBox1.Clear;
    FDTable1.Close;
-   Edit2.SetFocus;
 end;
 
 procedure TfrmFirebird.FormClose(Sender: TObject; var Action: TCloseAction);

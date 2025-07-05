@@ -27,8 +27,8 @@ object frmFirebird: TfrmFirebird
     ParentFont = False
   end
   object Label2: TLabel
-    Left = 8
-    Top = 97
+    Left = 144
+    Top = 182
     Width = 138
     Height = 15
     Caption = 'Select table to explorer :'
@@ -52,6 +52,19 @@ object frmFirebird: TfrmFirebird
     Font.Style = [fsBold]
     ParentFont = False
   end
+  object Label4: TLabel
+    Left = 8
+    Top = 91
+    Width = 203
+    Height = 17
+    Caption = 'Select Firebird database Library :'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object StatusBar1: TStatusBar
     Left = 0
     Top = 422
@@ -63,17 +76,16 @@ object frmFirebird: TfrmFirebird
         Width = 640
       end>
   end
-  object Button1: TButton
+  object btnPathDB: TButton
     Left = 8
     Top = 31
     Width = 75
     Height = 25
     Caption = '&Browse'
-    Enabled = False
     TabOrder = 0
-    OnClick = Button1Click
+    OnClick = btnPathDBClick
   end
-  object Edit1: TEdit
+  object edtPathDB: TEdit
     Left = 8
     Top = 62
     Width = 585
@@ -82,8 +94,8 @@ object frmFirebird: TfrmFirebird
     TabOrder = 2
   end
   object ComboBox1: TComboBox
-    Left = 8
-    Top = 118
+    Left = 144
+    Top = 203
     Width = 145
     Height = 23
     Style = csDropDownList
@@ -92,9 +104,9 @@ object frmFirebird: TfrmFirebird
   end
   object DBGrid1: TDBGrid
     Left = 0
-    Top = 147
+    Top = 232
     Width = 624
-    Height = 275
+    Height = 190
     Align = alBottom
     ReadOnly = True
     TabOrder = 4
@@ -104,16 +116,41 @@ object frmFirebird: TfrmFirebird
     TitleFont.Name = 'Segoe UI'
     TitleFont.Style = []
   end
-  object Edit2: TEdit
+  object edtPort: TEdit
     Left = 360
-    Top = 32
+    Top = 33
     Width = 57
     Height = 23
     Alignment = taCenter
     MaxLength = 4
     NumbersOnly = True
     TabOrder = 1
-    OnChange = Edit2Change
+  end
+  object edtPathLib: TEdit
+    Left = 8
+    Top = 148
+    Width = 585
+    Height = 23
+    ReadOnly = True
+    TabOrder = 6
+  end
+  object btnPathLib: TButton
+    Left = 8
+    Top = 114
+    Width = 75
+    Height = 25
+    Caption = '&Browse'
+    TabOrder = 7
+    OnClick = btnPathLibClick
+  end
+  object btnConnect: TButton
+    Left = 8
+    Top = 182
+    Width = 75
+    Height = 25
+    Caption = '&Connect'
+    TabOrder = 8
+    OnClick = btnConnectClick
   end
   object OpenDialog1: TOpenDialog
     Left = 560
@@ -121,19 +158,19 @@ object frmFirebird: TfrmFirebird
   end
   object FDConnection1: TFDConnection
     Left = 336
-    Top = 88
+    Top = 248
   end
   object FDTable1: TFDTable
     Connection = FDConnection1
     Left = 560
-    Top = 96
+    Top = 248
   end
   object DataSource1: TDataSource
-    Left = 464
-    Top = 96
+    Left = 456
+    Top = 248
   end
   object FDPhysFBDriverLink1: TFDPhysFBDriverLink
-    Left = 208
-    Top = 88
+    Left = 200
+    Top = 248
   end
 end

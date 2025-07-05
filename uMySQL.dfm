@@ -13,22 +13,9 @@ object frmMySQL: TfrmMySQL
   OnActivate = FormActivate
   OnClose = FormClose
   TextHeight = 15
-  object Label1: TLabel
-    Left = 8
-    Top = 8
-    Width = 136
-    Height = 15
-    Caption = 'Select ODBC connection'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
   object Label2: TLabel
-    Left = 8
-    Top = 121
+    Left = 184
+    Top = 59
     Width = 138
     Height = 15
     Caption = 'Select table to explorer :'
@@ -40,8 +27,8 @@ object frmMySQL: TfrmMySQL
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 8
-    Top = 65
+    Left = 184
+    Top = 3
     Width = 176
     Height = 15
     Caption = 'Select MySQL Server database :'
@@ -63,42 +50,18 @@ object frmMySQL: TfrmMySQL
         Width = 640
       end>
   end
-  object cbbTables: TComboBox
-    Left = 8
-    Top = 142
-    Width = 145
-    Height = 23
-    Style = csDropDownList
-    TabOrder = 5
-    OnChange = cbbTablesChange
-  end
-  object DBGrid1: TDBGrid
-    Left = 0
-    Top = 171
-    Width = 624
-    Height = 251
-    Align = alBottom
-    DataSource = DataSource1
-    ReadOnly = True
-    TabOrder = 6
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -12
-    TitleFont.Name = 'Segoe UI'
-    TitleFont.Style = []
-  end
   object cbbDB: TComboBox
-    Left = 8
-    Top = 86
+    Left = 184
+    Top = 24
     Width = 145
     Height = 23
     Style = csDropDownList
-    TabOrder = 4
+    TabOrder = 3
     OnChange = cbbDBChange
   end
   object lbledtUser: TLabeledEdit
-    Left = 304
-    Top = 29
+    Left = 8
+    Top = 24
     Width = 121
     Height = 23
     EditLabel.Width = 57
@@ -110,13 +73,12 @@ object frmMySQL: TfrmMySQL
     EditLabel.Font.Name = 'Segoe UI'
     EditLabel.Font.Style = [fsBold]
     EditLabel.ParentFont = False
-    Enabled = False
-    TabOrder = 1
+    TabOrder = 0
     Text = ''
   end
   object lbledtPassword: TLabeledEdit
-    Left = 304
-    Top = 78
+    Left = 8
+    Top = 83
     Width = 121
     Height = 23
     EditLabel.Width = 52
@@ -128,48 +90,60 @@ object frmMySQL: TfrmMySQL
     EditLabel.Font.Name = 'Segoe UI'
     EditLabel.Font.Style = [fsBold]
     EditLabel.ParentFont = False
-    Enabled = False
     PasswordChar = '*'
-    TabOrder = 2
+    TabOrder = 1
     Text = ''
   end
   object btnConnect: TButton
-    Left = 304
-    Top = 117
+    Left = 8
+    Top = 129
     Width = 75
     Height = 25
     Caption = '&Connect'
-    Enabled = False
-    TabOrder = 3
+    TabOrder = 2
     OnClick = btnConnectClick
   end
-  object cbbDSN: TComboBox
-    Left = 8
-    Top = 29
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 160
+    Width = 624
+    Height = 262
+    Align = alBottom
+    DataSource = DataSource1
+    TabOrder = 5
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -12
+    TitleFont.Name = 'Segoe UI'
+    TitleFont.Style = []
+  end
+  object cbbTables: TComboBox
+    Left = 184
+    Top = 80
     Width = 145
     Height = 23
-    Style = csDropDownList
-    TabOrder = 0
-    OnChange = cbbDSNChange
+    TabOrder = 6
+    OnChange = cbbTablesChange
   end
   object DataSource1: TDataSource
-    DataSet = ADOTable1
-    Left = 256
-    Top = 344
+    DataSet = FDTable1
+    Left = 432
+    Top = 336
   end
-  object ADOConnection1: TADOConnection
-    Left = 48
-    Top = 344
+  object FDConnection1: TFDConnection
+    Params.Strings = (
+      'DriverID=MySQL')
+    Left = 216
+    Top = 336
   end
-  object ADOTable1: TADOTable
-    Connection = ADOConnection1
-    Left = 152
-    Top = 344
+  object FDTable1: TFDTable
+    Connection = FDConnection1
+    Left = 536
+    Top = 336
   end
-  object ADOQuery1: TADOQuery
-    Connection = ADOConnection1
-    Parameters = <>
-    Left = 360
-    Top = 344
+  object FDQuery1: TFDQuery
+    Connection = FDConnection1
+    Left = 320
+    Top = 336
   end
 end
