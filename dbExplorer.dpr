@@ -7,7 +7,8 @@ uses
   uFirebird in 'uFirebird.pas' {frmFirebird},
   uMySQL in 'uMySQL.pas' {frmMySQL},
   uGlobal in 'uGlobal.pas',
-  uMSSQL in 'uMSSQL.pas' {frmMSSQL};
+  uMSSQL in 'uMSSQL.pas' {frmMSSQL},
+  uPostgreSQL in 'uPostgreSQL.pas' {frmPostgreSQL};
 
 {$R *.res}
 
@@ -20,5 +21,6 @@ begin
   Application.CreateForm(TfrmFirebird, frmFirebird);
   Application.CreateForm(TfrmMySQL, frmMySQL);
   Application.CreateForm(TfrmMSSQL, frmMSSQL);
+  Application.CreateForm(TfrmPostgreSQL, frmPostgreSQL);
   Application.Run;
 end.

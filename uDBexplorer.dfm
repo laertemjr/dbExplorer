@@ -45,9 +45,10 @@ object frmDBexplorer: TfrmDBexplorer
     TabOrder = 0
     OnChange = ComboBox1Change
     Items.Strings = (
-      'Firebird'
+      'Firebird Server'
       'Microsoft Access'
       'Microsoft SQL Server'
-      'MySQL Server')
+      'MySQL Server'
+      'postgreSQL Server')
   end
 end

@@ -1,4 +1,4 @@
-unit uMySQL;
+unit uPostgreSQL;
 
 interface
 
@@ -17,10 +17,10 @@ uses
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.VCLUI.Wait,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
   FireDAC.Comp.Client, FireDAC.Comp.DataSet, FireDAC.Phys.MySQL,
-  FireDAC.Phys.MySQLDef;
+  FireDAC.Phys.MySQLDef, FireDAC.Phys.PG, FireDAC.Phys.PGDef;
 
 type
-  TfrmMySQL = class(TForm)
+  TfrmPostgreSQL = class(TForm)
     StatusBar1: TStatusBar;
     Label2: TLabel;
     DataSource1: TDataSource;
@@ -34,12 +34,18 @@ type
     FDQuery1: TFDQuery;
     DBGrid1: TDBGrid;
     cbbTables: TComboBox;
+    FDPhysPgDriverLink1: TFDPhysPgDriverLink;
+    Label1: TLabel;
+    btnBrowse: TButton;
+    edtLib: TEdit;
+    OpenDialog1: TOpenDialog;
     procedure FormActivate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure cbbDBChange(Sender: TObject);
     procedure btnConnectClick(Sender: TObject);
     procedure conectParams();
     procedure cbbTablesChange(Sender: TObject);
+    procedure btnBrowseClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,7 +53,7 @@ type
   end;
 
 var
-  frmMySQL: TfrmMySQL;
+  frmPostgreSQL: TfrmPostgreSQL;
 
 implementation
 
@@ -56,14 +62,24 @@ uses
 
 {$R *.dfm}
 
-procedure TfrmMySQL.FormActivate(Sender: TObject);
+procedure TfrmPostgreSQL.FormActivate(Sender: TObject);
 begin
    StatusBar1.Panels[0].Text := sVerInfo;
-   lbledtUser.Text := 'root';
+   lbledtUser.Text := 'postgres';
    FDConnection1.LoginPrompt := False;
 end;
 
-procedure TfrmMySQL.cbbDBChange(Sender: TObject);
+procedure TfrmPostgreSQL.btnBrowseClick(Sender: TObject);
+begin
+   OpenDialog1.FileName := EmptyStr;
+   OpenDialog1.Filter   := 'postgreSQL server library (*.dll)|*.dll';
+   if OpenDialog1.Execute then
+      edtLib.Text := OpenDialog1.FileName
+   else
+      edtLib.Text := EmptyStr;
+end;
+
+procedure TfrmPostgreSQL.cbbDBChange(Sender: TObject);
 begin
    cbbTables.Clear;
    conectParams();
@@ -71,10 +87,10 @@ begin
    Screen.Cursor := crSQLWait;
    FDConnection1.Connected := True;
    Screen.Cursor := crDefault;
-   FDConnection1.GetTableNames(cbbDB.Text,'','', cbbTables.Items);
+   FDConnection1.GetTableNames(cbbDB.Text,'public','', cbbTables.Items);
 end;
 
-procedure TfrmMySQL.cbbTablesChange(Sender: TObject);
+procedure TfrmPostgreSQL.cbbTablesChange(Sender: TObject);
 begin
    FDTable1.Close;
    FDTable1.TableName := cbbTables.Text;
@@ -83,47 +99,47 @@ begin
    DBGrid1.DataSource := DataSource1;
 end;
 
-procedure TfrmMySQL.conectParams;
+procedure TfrmPostgreSQL.conectParams;
 begin
    FDConnection1.Connected := False;
    FDConnection1.Params.Clear;
-   FDConnection1.DriverName := 'MySQL';
+   FDConnection1.DriverName := 'PG';
+   FDPhysPgDriverLink1.VendorLib := edtLib.Text;
    FDConnection1.Params.Add('User_Name='+lbledtUser.Text);
    FDConnection1.Params.Add('Password='+lbledtPassword.Text);
 end;
 
-procedure TfrmMySQL.btnConnectClick(Sender: TObject);
+procedure TfrmPostgreSQL.btnConnectClick(Sender: TObject);
 begin
    conectParams();
    try
       Screen.Cursor := crSQLWait;
       FDConnection1.Connected := True;
       Screen.Cursor := crDefault;
-      ShowMessage('Connected to MySQL Server.');
+      ShowMessage('Connected to postgreSQL Server.');
       btnConnect.Enabled := False;
       lbledtUser.Enabled := False;
       lbledtPassword.Enabled := False;
+      btnBrowse.Enabled := False;
    except
-      ShowMessage('Could not connect to MySQL Server.');
+      ShowMessage('Could not connect to postgreSQL Server.');
       Screen.Cursor := crDefault;
       lbledtPassword.SetFocus;
       Exit;
    end;
-   //ADOQuery1.SQL.Text := 'SHOW DATABASES';
-   FDQuery1.SQL.Text := 'SELECT * FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME NOT IN (' + QuotedStr('mysql') + ', ' +
-                          QuotedStr('information_schema') + ', ' + QuotedStr('performance_schema') + ', ' + QuotedStr('sys')+ ')';
+   FDQuery1.SQL.Text := 'SELECT datname FROM pg_database WHERE datistemplate = false AND datallowconn = true';
    FDQuery1.Open;
    FDQuery1.First;
    cbbDB.Items.Clear;
    while not FDQuery1.EOF do
    begin
-      cbbDB.Items.Add(FDQuery1.FieldByName('SCHEMA_NAME').AsString);
+      cbbDB.Items.Add(FDQuery1.FieldByName('datname').AsString);
       FDQuery1.Next;
    end;
    FDQuery1.Close;
 end;
 
-procedure TfrmMySQL.FormClose(Sender: TObject; var Action: TCloseAction);
+procedure TfrmPostgreSQL.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
    FDConnection1.Connected := False;
    cbbDB.Clear;
@@ -132,6 +148,8 @@ begin
    lbledtUser.Clear;
    lbledtPassword.Enabled := True;
    lbledtPassword.Clear;
+   edtLib.Clear;
+   btnBrowse.Enabled := True;
    btnConnect.Enabled := True;
 end;
 

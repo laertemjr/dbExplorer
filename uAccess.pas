@@ -55,7 +55,7 @@ uses
 procedure TfrmAccess.FormActivate(Sender: TObject);
 begin
    StatusBar1.Panels[0].Text := sVerInfo;
-   OpenDialog1.Filter := 'Microsoft Access database|*.mdb;*.accdb';
+   OpenDialog1.Filter := 'MS-Access database path |*.mdb;*.accdb';
 end;
 
 procedure TfrmAccess.Button1Click(Sender: TObject);
@@ -69,10 +69,10 @@ begin
          Screen.Cursor := crSQLWait;
          FDConnection1.Connected := True;
          Screen.Cursor := crDefault;
-         ShowMessage('Database is connected.');
+         ShowMessage('MS-Access is connected.');
          FDConnection1.GetTableNames('', '', '', ComboBox1.Items);
       except
-         ShowMessage('Could not connect to database.');
+         ShowMessage('Could not connect to MS-Access.');
          Screen.Cursor := crDefault;
          clean;
       end;

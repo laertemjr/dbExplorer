@@ -94,7 +94,7 @@ end;
 procedure TfrmFirebird.btnPathDBClick(Sender: TObject);
 begin
    OpenDialog1.FileName := EmptyStr;
-   OpenDialog1.Filter := 'Firebird database (*.fdb)|*.fdb';
+   OpenDialog1.Filter := 'Firebird database path (*.fdb)|*.fdb';
    if OpenDialog1.Execute then
       edtPathDB.Text := OpenDialog1.FileName
    else
@@ -125,10 +125,10 @@ begin
       Screen.Cursor := crSQLWait;
       FDConnection1.Connected := True;
       Screen.Cursor := crDefault;
-      ShowMessage('Database is connected.');
+      ShowMessage('Firebird is connected.');
       FDConnection1.GetTableNames('', '', '', ComboBox1.Items);
    except
-      ShowMessage('Could not connect to database.');
+      ShowMessage('Could not connect to Firebird.');
       Screen.Cursor := crDefault;
    end;
 end;
