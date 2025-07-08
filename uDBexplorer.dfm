@@ -49,6 +49,7 @@ object frmDBexplorer: TfrmDBexplorer
       'Microsoft Access'
       'Microsoft SQL Server'
       'MySQL Server'
-      'postgreSQL Server')
+      'postgreSQL Server'
+      'SQLite')
   end
 end

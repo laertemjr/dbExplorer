@@ -27,7 +27,7 @@ var
 implementation
 
 uses
-   uAccess, uFirebird, uMSSQL, uMySQL, uPostgreSQL, uGlobal;
+   uAccess, uFirebird, uMSSQL, uMySQL, uPostgreSQL, uSQLite ,uGlobal;
 
 {$R *.dfm}
 
@@ -58,15 +58,21 @@ begin
          frmMSSQL.ShowModal;
       end;
 
-      3: // MySQL Server
+      3: // MySQL
       begin
          frmMySQL.ShowModal;
       end;
 
-      4: // MySQL Server
+      4: // postgreSQL
       begin
          frmPostgreSQL.ShowModal;
       end;
+
+      5: // SQLite
+      begin
+         frmSQLite.ShowModal;
+      end;
+
 
    end;
 end;

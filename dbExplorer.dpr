@@ -8,7 +8,8 @@ uses
   uMySQL in 'uMySQL.pas' {frmMySQL},
   uGlobal in 'uGlobal.pas',
   uMSSQL in 'uMSSQL.pas' {frmMSSQL},
-  uPostgreSQL in 'uPostgreSQL.pas' {frmPostgreSQL};
+  uPostgreSQL in 'uPostgreSQL.pas' {frmPostgreSQL},
+  uSQLite in 'uSQLite.pas' {frmSQLite};
 
 {$R *.res}
 
@@ -22,5 +23,6 @@ begin
   Application.CreateForm(TfrmMySQL, frmMySQL);
   Application.CreateForm(TfrmMSSQL, frmMSSQL);
   Application.CreateForm(TfrmPostgreSQL, frmPostgreSQL);
+  Application.CreateForm(TfrmSQLite, frmSQLite);
   Application.Run;
 end.
