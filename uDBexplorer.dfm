@@ -50,6 +50,7 @@ object frmDBexplorer: TfrmDBexplorer
       'Microsoft SQL Server'
       'MySQL Server'
       'postgreSQL Server'
-      'SQLite')
+      'SQLite'
+      'MariaDB')
   end
 end

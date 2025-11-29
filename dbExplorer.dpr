@@ -9,7 +9,8 @@ uses
   uGlobal in 'uGlobal.pas',
   uMSSQL in 'uMSSQL.pas' {frmMSSQL},
   uPostgreSQL in 'uPostgreSQL.pas' {frmPostgreSQL},
-  uSQLite in 'uSQLite.pas' {frmSQLite};
+  uSQLite in 'uSQLite.pas' {frmSQLite},
+  uMariaDB in 'uMariaDB.pas' {frmMariaDB};
 
 {$R *.res}
 
@@ -24,5 +25,6 @@ begin
   Application.CreateForm(TfrmMSSQL, frmMSSQL);
   Application.CreateForm(TfrmPostgreSQL, frmPostgreSQL);
   Application.CreateForm(TfrmSQLite, frmSQLite);
+  Application.CreateForm(TfrmMariaDB, frmMariaDB);
   Application.Run;
 end.
